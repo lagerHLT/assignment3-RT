@@ -1,0 +1,36 @@
+!Authors: Christopher Lagerhult, Jimmy Holm
+
+system assignment2{
+       declarations{
+	tasks T1, T2, T3, T4;
+	scalar CSave, CLoad;
+	indexed Period, Deadline, CompTime, RespTime;
+	!blocking BlockingTime;
+	priority Prio;
+       }
+
+       initialise{
+	Deadline[T1] = 6.0;
+	Deadline[T2] = 7.0;
+	Deadline[T3] = 13.0;
+	Deadline[T4] = 60.0;
+	Period[T1] = 20.0;
+	Period[T2] = 7.0;
+	Period[T3] = 14.0;
+	Period[T4] = 100.0;
+	CompTime[T1] = 2.0;
+	CompTime[T2] = 3.0;
+	CompTime[T3] = 5.0;
+	CompTime[T4] = 4.0;
+	Prio[T1] = 1;
+	Prio[T2] = 2;
+ 	Prio[T3] = 2;
+	Prio[T4] = 3;
+	
+       }
+       
+       formulas{
+	RespTime[i] = sigma(ep, CompTime[j]) +  sigma(hp, ceiling(RespTime[i]/Period[j])* CompTime[j]);
+	!GlobalVar = CompTime[T1] + CompTime[T2] * CompTime[T3];
+       }
+}

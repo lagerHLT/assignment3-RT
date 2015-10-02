@@ -1,0 +1,30 @@
+!Authors: Christopher Lagerhult, Jimmy Holm
+
+system assignment1{
+       declarations{
+	tasks T1, T2, T3;
+	indexed Period, Deadline, CompTime, RespTime;
+	!blocking BlockingTime;
+	priority Prio;
+       }
+
+       initialise{
+	Deadline[T1] = 10.0;
+	Deadline[T2] = 15.0;
+	Deadline[T3] = 35.0;
+	Period[T1] = 10.0;
+	Period[T2] = 15.0;
+	Period[T3] = 35.0;
+	CompTime[T1] = 2.0;
+	CompTime[T2] = 4.0;
+	CompTime[T3] = 10.0;
+	Prio[T1] = 1;
+	Prio[T2] = 2;
+ 	Prio[T3] = 3;
+       }
+       
+       formulas{
+	RespTime[i] = CompTime[i] +  sigma(hp, ceiling(RespTime[i]/Period[j])* CompTime[j]);
+	!GlobalVar = CompTime[T1] + CompTime[T2] * CompTime[T3];
+       }
+}
