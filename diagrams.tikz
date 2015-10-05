@@ -1,0 +1,85 @@
+\usetikzlibrary{positioning}
+    \begin{tikzpicture}[
+    	active/.style={rectangle, draw=black, fill=black!15, thin, font=\tiny, inner sep=0, outer sep=0, scale=1.5},
+    	idle/.style={rectangle, draw=black, densely dotted, fill=white, thin, ,font=\tiny, inner sep=0, outer sep=0, scale=1.5},
+    scale=1.5,
+    ]
+    
+    % Legend
+    \node[draw=black, thin, anchor=north west, minimum height=6em, minimum width=5em, text depth=4em] at (10.5em, 0 em){Legend};
+    \node[style=active, anchor=west, xscale=0.5em, yscale=0.5em] at(10.7em ,-1.4em){};
+    \node[anchor=west] at(11.25em ,-1.4em){\tiny Executing};
+    \node[style=idle, anchor=west, xscale=0.5em, yscale=0.5em] at(10.7em ,-2.1em){};
+    \node[anchor=west] at(11.25em ,-2.1em){\tiny Preempted};
+    \draw[->](11em, -3em)--(11em, -2.5em);
+    \node[anchor=west] at(11.25em ,-2.8em){\tiny Released};
+    \draw[->](11em, -3.2em)--(11em, -3.7em);
+    \node[anchor=west] at(11.25em ,-3.5em){\tiny Finished};
+    
+    \node[anchor=south] at (0em,0em) {\tiny Task};
+    \node[anchor=west] at (10em, -4.5em){\tiny Time (ms)};
+    \draw(0,0)--(0,-4.5em);
+    \draw(0,-4.5em)--(10em,-4.5em);
+    \foreach \x in {1, ..., 10}
+    {
+    	\draw (\x em, -4.3em) -- (\x em, -4.7em); 
+    	% Draw dotted y-axis
+    	\pgfmathsetmacro\ddt{\x-0.5}
+    	\draw[dashed, draw=black!30](\x      em, -4.5 em)--(\x    em, 0 em);
+    	\draw[dashed, draw=black!25](\ddt em, -4.8 em)--(\ddt em, 0 em);
+    	\node (y\x) at (\x em, -5em) {\tiny \pgfmathparse{int(\x*4 - 4)}\pgfmathresult};
+    }
+    % Show deadline for T3
+    \draw[ultra thick, dashed, draw=red] (9.75em, 0)--(9.75em, -5.4em);
+    \node[anchor=north] at (9.75em, -5.1em){\tiny $\tau_3$ deadline};
+    
+    
+    %T1
+    \node at (-0.5em, -0.5 em) (t1){\footnotesize $\tau_1$};
+    % Draw all T1
+    \node[style=active, xscale=0.5em, yscale=0.5em, anchor=west] at (1em,-0.5em){};
+    \node[style=active, xscale=0.5em, yscale=0.5em, anchor=west] at (3.5em,-0.5em){};
+    \node[style=active, xscale=0.5em, yscale=0.5em, anchor=west] at (6em,-0.5em){};
+    \node[style=active, xscale=0.5em, yscale=0.5em, anchor=west] at (8.5em,-0.5em){};
+    
+    \draw[->](1 em, -1 em)--(1 em,  0 em);
+    \draw[->](1.5 em, -0 em)--(1.5 em, -1 em);
+    \draw[->](3.5 em, -1 em)--(3.5 em,  0 em);
+    \draw[->](4 em, -0 em)--(4 em, -1 em);
+    \draw[->](6 em, -1 em)--(6 em,  0 em);
+    \draw[->](6.5 em, -0 em)--(6.5 em, -1 em);
+    \draw[->](8.5 em, -1 em)--(8.5 em,  0 em);
+    \draw[->](9 em, -0 em)--(9 em, -1 em);
+    %T2
+    \node at (-0.5em, -2 em) (t2){\footnotesize $\tau_2$};
+    % Draw all T2
+    \node[style=idle, xscale=0.5em, yscale=0.5em, anchor=west] at (1 em, -2 em){};
+    
+    \node[style=active, xscale=1em, yscale=0.5em, anchor=west] at (1.5 em, -2 em){};
+    \node[style=active, xscale=1em, yscale=0.5em, anchor=west] at (4.75 em, -2 em){};
+    \node[style=active, xscale=1em, yscale=0.5em, anchor=west] at (9 em, -2 em){};
+    
+    \draw[->](1 em, -2.5 em)--(1 em,  -1.5 em);
+    \draw[->](2.5 em, -1.5 em)--(2.5 em,  -2.5 em);
+    \draw[->](4.75 em, -2.5 em)--(4.75 em,  -1.5 em);
+    \draw[->](5.75 em, -1.5 em)--(5.75 em,  -2.5 em);
+    \draw[->](9 em, -2.5 em)--(9 em,  -1.5 em);
+    \draw[->](10 em, -1.5 em)--(10 em,  -2.5 em);
+    %T3
+    \node at (-0.5em, -3.5 em) (t3){\footnotesize $\tau_3$};
+    % Draw all T3
+    \node[style=idle, xscale=1.5em, yscale=0.5em, anchor=west] at (1 em, -3.5em){};
+    \node[style=idle, xscale=0.5em, yscale=0.5em, anchor=west] at (3.5 em, -3.5em){};
+    \node[style=idle, xscale=1em, yscale=0.5em, anchor=west] at (4.75 em, -3.5em){};
+    \node[style=idle, xscale=1em, yscale=0.5em, anchor=west] at (6 em, -3.5em){};
+    \node[style=idle, xscale=1.5em, yscale=0.5em, anchor=west] at (8.5 em, -3.5em){};
+    
+    \node[style=active, xscale=1em, yscale=0.5em, anchor=west] at (2.5 em, -3.5em){};
+    \node[style=active, xscale=0.75em, yscale=0.5em, anchor=west] at (4 em, -3.5em){};
+    \node[style=active, xscale=0.25em, yscale=0.5em, anchor=west] at (5.75 em, -3.5em){};
+    \node[style=active, xscale=2 em, yscale=0.5em, anchor=west] at (6.5 em, -3.5em){};
+    
+    \draw[->](1 em, -4 em)--(1 em,  -3 em);
+    
+    
+    \end{tikzpicture}

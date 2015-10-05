@@ -26,3 +26,31 @@ system assignment2_2_fail{
 	RespTime[i] = sigma(ep, CompTime[j]) +  sigma(hp, ceiling(RespTime[i]/Period[j])* CompTime[j]);
        }
 }
+
+system assignment2_2_pass{
+       declarations{
+	tasks T1, T2, T3, T4;
+	indexed Period,  CompTime, RespTime;
+	priority Prio;
+       }
+
+       initialise{
+	Period[T1] = 20.0;
+	Period[T2] = 7.0;
+	Period[T3] = 14.0;
+	Period[T4] = 100.0;
+	CompTime[T1] = 2.0;
+	CompTime[T2] = 3.0;
+	CompTime[T3] = 5.0;
+	CompTime[T4] = 4.0;
+	Prio[T1] = 2;
+	Prio[T2] = 1;
+ 	Prio[T3] = 3;
+	Prio[T4] = 4;
+	
+       }
+       
+       formulas{
+	RespTime[i] = sigma(ep, CompTime[j]) +  sigma(hp, ceiling(RespTime[i]/Period[j])* CompTime[j]);
+       }
+}
